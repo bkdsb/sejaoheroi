@@ -7,6 +7,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(routes);
+
+
 /** 
  * Rota / Recurso
 **/
@@ -39,8 +41,23 @@ app.use(routes);
  * Query Builder: table('user').select('*').where()
  */
 
+ 
+
+//MODIFICAÇÃO AQUI
 
 const PORT = process.env.PORT || 3333
 app.listen(PORT,() => {
    console.log('Servidor rodando!');
+});
+
+//MONGODB ADDED
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://<deploy>:<Senh@kk1>@rest-2ullt.mongodb.net/test?retryWrites=true&w=majority";
+
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true },);
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
 });
